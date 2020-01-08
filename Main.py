@@ -1,3 +1,5 @@
+import time
+
 import networkx as nx
 
 from Astar import Astar
@@ -33,11 +35,14 @@ if __name__ == "__main__":
     graph = nx.Graph()
     distances = add_edges_from_file('links.txt', graph)
     astar = Astar()
+    start_time = time.time()
     astar.solve(graph, distances)
+    end_time = time.time()
 
     print(astar.solution.path)
     print(len(astar.solution.path))
     print("expanded nodes", astar.expanded_nodes)
     print("cost", astar.solution.cost)
+    print("Solution time", end_time - start_time)
 
 

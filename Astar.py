@@ -17,8 +17,10 @@ class Astar:
         while open_set:
             self.solution = self.minimal_solution(open_set)
             last_node = self.solution.path[-1]
-            if len(self.solution.path) == nodes_number:
+            if len(self.solution.path) == nodes_number and last_node == first_node:
                 break
+            if len(self.solution.path) == nodes_number and last_node != first_node:
+                self.solution.path.remove(first_node)
             for neigh in graph.adj[last_node].items():
                 node = neigh[0]
                 cost = neigh[1]['weight']

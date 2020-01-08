@@ -18,6 +18,8 @@ Muenchen Erlangen 3036.00
 Koeln Erlangen 4848.00
 Erlangen Frankfurt 3312.00
 Berlin Essen 6540.00
+IP Frankfurt 0
+IP Hannover 0
 Leipzig Essen 5676.00
 Leipzig Erlangen 3828.00
 Leipzig Stuttgart 5664.00
