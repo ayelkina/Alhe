@@ -28,7 +28,3 @@ if __name__ == "__main__":
     greedy.solve(graph, list(graph.nodes)[0])
     end_greedy = time.time()
     print("greedy time", end_greedy - start_greedy)
-
-
-
-
