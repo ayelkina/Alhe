@@ -1,14 +1,16 @@
+import math
+
 from networkx import Graph
 
 
 class Bruteforce:
 
-    min_cost = 9999999999
+    min_cost = math.inf
     solution = []
     count = 0
 
     def solve(self, graph: Graph, first_node):
-        self.min_cost = 9999999999
+        self.min_cost = math.inf
         self.solution = []
         self._solve(graph, first_node, first_node, [], 0)
         print('cost={}, solution={}'.format(self.min_cost, self.solution))

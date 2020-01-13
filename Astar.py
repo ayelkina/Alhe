@@ -1,4 +1,4 @@
-import copy
+import math
 
 from networkx import Graph
 
@@ -41,7 +41,7 @@ class Astar:
 
     @staticmethod
     def minimal_solution(open_set: list):
-        min_cost = 9999999999
+        min_cost = math.inf
         solution = ''
         for state in open_set:
             if state.goal < min_cost:
