@@ -35,15 +35,17 @@ def add_edges_from_file(file_links, graph):
 
 if __name__ == "__main__":
     graph = nx.Graph()
-    distances = add_edges_from_file('links.txt', graph)
+    distances = add_edges_from_file('links_big.txt', graph)
     astar = Astar()
     bruteforce = Bruteforce()
     greedy = Greedy()
 
     start_astar = time.time()
+    distances.sort()
     astar.solve(graph, distances)
     print([list(graph.nodes)[0]] + astar.solution.path)
     print("cost", astar.solution.cost)
+    print("Expanded nodes", astar.expanded_nodes)
     end_astar = time.time()
     print("A* time", end_astar - start_astar, '\n')
     # print(len(astar.solution.path))
