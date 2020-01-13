@@ -1,3 +1,4 @@
+from Bruteforce import Bruteforce
 import time
 
 import networkx as nx
@@ -35,14 +36,20 @@ if __name__ == "__main__":
     graph = nx.Graph()
     distances = add_edges_from_file('links.txt', graph)
     astar = Astar()
-    start_time = time.time()
-    astar.solve(graph, distances)
-    end_time = time.time()
+    bruteforce = Bruteforce()
 
-    print(astar.solution.path)
-    print(len(astar.solution.path))
-    print("expanded nodes", astar.expanded_nodes)
+    start_astar = time.time()
+    astar.solve(graph, distances)
+    print([list(graph.nodes)[0]] + astar.solution.path)
     print("cost", astar.solution.cost)
-    print("Solution time", end_time - start_time)
+    end_astar = time.time()
+    print("A* time", end_astar - start_astar, '\n')
+    # print(len(astar.solution.path))
+    # print("expanded nodes", astar.expanded_nodes)
+
+    start_brute = time.time()
+    bruteforce.solve(graph, list(graph.nodes)[0])
+    end_brute = time.time()
+    print("bruteforce time", end_brute - start_brute)
 
 
