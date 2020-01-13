@@ -16,6 +16,7 @@ class Bruteforce:
 
     def _solve(self, graph: Graph, first_node, cur_node, visited_nodes: list, cost):
         self.count += 1
+
         if len(visited_nodes) == len(graph.nodes):
             if visited_nodes[-1] == first_node and cost < self.min_cost:
                 self.min_cost = cost
