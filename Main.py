@@ -35,7 +35,7 @@ def add_edges_from_file(file_links, graph):
 
 if __name__ == "__main__":
     graph = nx.Graph()
-    distances = add_edges_from_file('links_big.txt', graph)
+    distances = add_edges_from_file('links.txt', graph)
     astar = Astar()
     bruteforce = Bruteforce()
     greedy = Greedy()
@@ -48,8 +48,6 @@ if __name__ == "__main__":
     print("Expanded nodes", astar.expanded_nodes)
     end_astar = time.time()
     print("A* time", end_astar - start_astar, '\n')
-    # print(len(astar.solution.path))
-    # print("expanded nodes", astar.expanded_nodes)
 
     start_brute = time.time()
     bruteforce.solve(graph, list(graph.nodes)[0])

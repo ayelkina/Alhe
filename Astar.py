@@ -16,7 +16,7 @@ class Astar:
         open_set = [Path(0, 0, [first_node], edges)]
 
         while open_set:
-            self.solution: Path = self.minimal_solution(open_set)
+            self.solution = self.minimal_solution(open_set)
             last_node = self.solution.path[-1]
             if len(self.solution.path) == nodes_number and last_node == first_node:
                 break
