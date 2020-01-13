@@ -4,6 +4,7 @@ import time
 import networkx as nx
 
 from Astar import Astar
+from Greedy import Greedy
 
 
 def add_nodes_from_file(file_nodes, graph):
@@ -37,6 +38,7 @@ if __name__ == "__main__":
     distances = add_edges_from_file('links_big.txt', graph)
     astar = Astar()
     bruteforce = Bruteforce()
+    greedy = Greedy()
 
     start_astar = time.time()
     distances.sort()
@@ -52,6 +54,13 @@ if __name__ == "__main__":
     start_brute = time.time()
     bruteforce.solve(graph, list(graph.nodes)[0])
     end_brute = time.time()
-    print("bruteforce time", end_brute - start_brute)
+    print("bruteforce time", end_brute - start_brute, '\n')
+
+    start_greedy = time.time()
+    greedy.solve(graph, list(graph.nodes)[0])
+    end_greedy = time.time()
+    print("greedy time", end_greedy - start_greedy)
+
+
 
 
