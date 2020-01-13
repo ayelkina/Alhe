@@ -10,6 +10,11 @@ class Astar:
     solution = []
 
     def solve(self, graph: Graph, edges: list):
+        self._solve(graph, edges)
+        print('cost={}, solution={}'.format(self.solution.cost, [list(graph.nodes)[0]] + self.solution.path))
+        print("expanded nodes", self.expanded_nodes)
+
+    def _solve(self, graph: Graph, edges: list):
         input_nodes = list(graph.nodes)
         nodes_number = len(input_nodes)
         first_node = input_nodes[0]

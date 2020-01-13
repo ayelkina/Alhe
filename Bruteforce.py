@@ -12,7 +12,7 @@ class Bruteforce:
         self.solution = []
         self._solve(graph, first_node, first_node, [], 0)
         print('cost={}, solution={}'.format(self.min_cost, self.solution))
-        print(self.count)
+        print('expanded nodes', self.count)
 
     def _solve(self, graph: Graph, first_node, cur_node, visited_nodes: list, cost):
         self.count += 1
