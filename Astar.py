@@ -11,33 +11,46 @@ class Astar:
 
     def solve(self, graph: Graph, edges: list):
         self._solve(graph, edges)
-        print('cost={}, solution={}'.format(self.solution.cost, [list(graph.nodes)[0]] + self.solution.path))
+        print('cost={}, solution={}'.format(self.solution.cost, self.solution.path))
         print("expanded nodes", self.expanded_nodes)
 
     def _solve(self, graph: Graph, edges: list):
         input_nodes = list(graph.nodes)
         nodes_number = len(input_nodes)
         first_node = input_nodes[0]
-        open_set = [Path(0, 0, [first_node], edges)]
+        open_set = [Path(0, 0, [first_node])]
+        expanded = []
 
         while open_set:
             self.solution = self.minimal_solution(open_set)
             last_node = self.solution.path[-1]
-            if len(self.solution.path) == nodes_number and last_node == first_node:
-                break
-            if len(self.solution.path) == nodes_number and last_node != first_node:
-                self.solution.path.remove(first_node)
-            for neigh in graph.adj[last_node].items():
+            if self.solution.path in expanded:
+                continue
+
+            if len(self.solution.path) == nodes_number:
+                if last_node == first_node:
+                    self.solution.path = [first_node] + self.solution.path
+                    break
+                elif self.solution.path[0] == first_node:
+                    self.solution.path.remove(first_node)
+                else:
+                    continue
+            neighbours = graph.adj[last_node].items()
+            for neigh in neighbours:
                 node = neigh[0]
-                cost = neigh[1]['weight']
-                if node in self.solution.path: continue
-                sum_cost = self.solution.cost + cost
+                if node in self.solution.path:
+                    continue
+                sum_cost = self.solution.cost + neigh[1]['weight']
                 new_path = self.solution.path + [node]
-                not_used_edges = self.solution.not_used_edges[:]
-                not_used_edges.remove(cost)
-                heuristic = self.heuristic_fun(not_used_edges, nodes_number, len(new_path)-1)
-                open_set.append(Path(sum_cost, heuristic, new_path, not_used_edges))
+                heuristic = self.heuristic_fun(edges, nodes_number, len(new_path) - 1)
+                next_solution = Path(sum_cost, heuristic, new_path)
+                open_set.append(next_solution)
             self.expanded_nodes += 1
+            expanded.append(self.solution.path)
+
+        if len(open_set) == 0:
+            self.solution.cost = math.inf
+            self.solution.path = []
 
     @staticmethod
     def minimal_solution(open_set: list):
@@ -53,7 +66,7 @@ class Astar:
     @staticmethod
     def heuristic_fun(edges: list, n: int, k: int):
         sum = 0
-        nodes_left = n-k
+        nodes_left = n - k
         for index in range(nodes_left):
             sum += edges[index]
 

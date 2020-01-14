@@ -7,12 +7,17 @@ from NetworkParser import NetworkParser
 
 if __name__ == "__main__":
     parser = NetworkParser()
-    graph = parser.load_graph_from_txt("links.txt")
-    # graph = parser.load_graph_from_xml("polska.xml")
+    graph = parser.load_graph_from_txt("links_big.txt")
+    # graph = parser.load_graph_from_xml("janos-us.xml")
 
     astar = Astar()
     bruteforce = Bruteforce()
     greedy = Greedy()
+
+    start_greedy = time.time()
+    greedy.solve(graph, list(graph.nodes)[0])
+    end_greedy = time.time()
+    print("greedy time", end_greedy - start_greedy, '\n')
 
     start_astar = time.time()
     astar.solve(graph, parser.sorted_costs)
@@ -24,7 +29,19 @@ if __name__ == "__main__":
     end_brute = time.time()
     print("bruteforce time", end_brute - start_brute, '\n')
 
-    start_greedy = time.time()
-    greedy.solve(graph, list(graph.nodes)[0])
-    end_greedy = time.time()
-    print("greedy time", end_greedy - start_greedy)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
